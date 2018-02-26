@@ -26,11 +26,11 @@ module.exports = {
   },
   getUsersByAllParams: function (req, res) {
     var options = {
-      perPage: parseInt(req.query.limit) || 10,
+      perPage: parseInt(req.query.limit) || 100,
       page: parseInt(req.query.page) || 0,
-      order:req.query.order || 'userName'
+      order: req.query.order || 'userName'
     };
-    var query = User.find({}).populate('roleCode').populate('userPlanRef').sort(options.order);
+    var query = User.find({markDelete:false}).populate('roleCode').populate('userPlanRef').sort(options.order);
     query.paginate(options, function (err, results) {
       if (err) throw err;
       else
@@ -49,6 +49,27 @@ module.exports = {
       deffered.resolve(data);
     });
     return deffered.promise;
+  },
+
+  removeUserByUpadte: function (req, res) {
+    var id = req.params.id;
+    User.findOneAndUpdate({
+      _id: id
+    }, {
+      $set: {
+        markDelete: true
+      }
+    }, {
+      new: true
+    }, function (err, doc) {
+      if (err) throw err;
+      else
+        res.json({
+          "message": "Update User successfully"
+        });
+    });
+
   }
+
 
 };

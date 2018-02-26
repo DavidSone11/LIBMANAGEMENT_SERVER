@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
         var bearer = bearerHeader.split(" ");
         bearerToken = bearer[1];
         req.token = bearerToken;
-        jwt.verify(token, require("../config/secret")(), function (err, decoded) {
+        jwt.verify(bearerToken, require("../config/secret")(), function (err, decoded) {
             if (err) {
                 return res.json({
                     success: false,
