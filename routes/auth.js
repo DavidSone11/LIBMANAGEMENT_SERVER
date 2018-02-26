@@ -10,7 +10,6 @@ var q = require("q");
 
 
 module.exports = {
-
   login: function (req, res) {
   var decodeByApp = req.headers.authorization.split(" ")[1];
   var decoded = new Buffer(decodeByApp, 'base64').toString();

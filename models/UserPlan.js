@@ -6,10 +6,6 @@ var UserPlanSchema = new mongoose.Schema({
     default: 'plan001',
     index: true
   },
-  userRef: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
   createdTime: {
     type: Date,
     default: Date.now
@@ -24,7 +20,6 @@ var UserPlanSchema = new mongoose.Schema({
 
 var userPlan = mongoose.model('Userplan', UserPlanSchema);
 var p = new userPlan();
-p.planName = "USERPLAN001";
-p.userRef = "5a91641d3c7a124134483fed",
+p.planName = "PLAN001";
 p.save();
 module.exports = userPlan;

@@ -30,7 +30,7 @@ module.exports = {
       page: parseInt(req.query.page) || 0,
       order:req.query.order || 'userName'
     };
-    var query = User.find({}).populate('roleCode').sort(options.order);
+    var query = User.find({}).populate('roleCode').populate('userPlanRef').sort(options.order);
     query.paginate(options, function (err, results) {
       if (err) throw err;
       else
@@ -43,7 +43,7 @@ module.exports = {
     User.find({
       userName: username,
       password: password
-    }).populate('roleCode').
+    }).populate('roleCode').populate('userPlanRef').
     exec(function (err, data) {
       if (err) deffered.reject(err);
       deffered.resolve(data);

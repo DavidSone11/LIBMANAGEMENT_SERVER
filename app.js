@@ -9,6 +9,7 @@ var fs = require('fs');
 var cors = require('cors');
 var session = require('express-session');
 var index = require('./routes/index');
+var UserPlan = require('./models/UserPlan');
 require("./database/db");
 
 var app = express();
