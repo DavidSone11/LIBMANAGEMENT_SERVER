@@ -5,6 +5,7 @@ var User = require("../models/User");
 var Role = require("../models/Role");
 var mongoose = require('mongoose');
 var q = require("q");
+require('mongoose-query-paginate');
 module.exports = {
 
   createUser: function (req, res) {
@@ -23,14 +24,18 @@ module.exports = {
 
     });
   },
-  find: function (req, res) {
-    User.find({}).populate('roleCode').
-    exec(function (err, data) {
-      res.json({
-        "records": data
-      });
+  getUsersByAllParams: function (req, res) {
+    var options = {
+      perPage: parseInt(req.query.limit) || 10,
+      page: parseInt(req.query.page) || 0,
+      order:req.query.order || 'userName'
+    };
+    var query = User.find({}).populate('roleCode').sort(options.order);
+    query.paginate(options, function (err, results) {
+      if (err) throw err;
+      else
+        return res.json(results);
     });
-
   },
 
   findByUserAndPassword: function (username, password) {

@@ -21,6 +21,6 @@ router.get('/logout', function (req, res) {
 
 });
 router.post('/api/v1/createUser', user.createUser);
-router.get('/api/v1/find', [require("../middlewares/ApiAuthentication")], user.find);
+router.get('/api/v1/getUsersByAllParams', [require("../middlewares/ApiAuthentication")], user.getUsersByAllParams);
 
 module.exports = router;

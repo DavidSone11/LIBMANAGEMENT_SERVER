@@ -12,8 +12,7 @@ var q = require("q");
 module.exports = {
 
   login: function (req, res) {
-    var decodeByApp = req.body.headers.Authorization.split(" ")[1];
-   // var decodeByApp = req.headers.authorization.split(" ")[1]
+  var decodeByApp = req.headers.authorization.split(" ")[1];
   var decoded = new Buffer(decodeByApp, 'base64').toString();
     if (decoded.split(":")[0] == '' || decoded.split(":")[1] == '') {
       res.status(401);
@@ -81,8 +80,8 @@ var generateToken = function (userResults) {
 };
 
 var tokenExpireInSecond = function () {
-  // return 60 * 60 * 24; // 24 hrs
-  return 60 * 1; // 2 min = 120 sec
+   return 60 * 60 * 24; // 24 hrs
+ // return 60 * 1; // 2 min = 120 sec
 };
 var setInCookie = function(){
   res.cookie('cookiename', 'cookievalue', { maxAge: 900000, httpOnly: true });
