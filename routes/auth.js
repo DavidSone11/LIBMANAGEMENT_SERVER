@@ -53,6 +53,7 @@ var validateCredientials = function (username,password) {
         var userOBJWithToken = {
           username: results.userName,
           role: results.roleCode._doc.name,
+          userPlan: results.userPlanRef.planName,
           token: token
         };
         deffered.resolve(userOBJWithToken);
