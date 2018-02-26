@@ -20,7 +20,8 @@ router.get('/logout', function (req, res) {
     });
 
 });
-router.post('/api/v1/createUser', user.createUser);
-router.get('/api/v1/getUsersByAllParams', [require("../middlewares/ApiAuthentication")], user.getUsersByAllParams);
+router.post('/api/v1/user/createUser', user.createUser);
+//router.get('/api/v1/getUsersByAllParams', [require("../middlewares/ApiAuthentication")], user.getUsersByAllParams);
+router.get('/api/v1/user/getUsersByAllParams', [require("../middlewares/api.authentication")], user.getUsersByAllParams);
 
 module.exports = router;
